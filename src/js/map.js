@@ -259,7 +259,7 @@ function directionsUpdated(e) {
   }
 
 
-  var req = "http://dev.virtualearth.net/REST/V1/Routes/Transit?wp.0=" + encodeURIComponent(start) + "&wp.1=" + encodeURIComponent(to) + "&output=json&key=" + "Air9YbvoUA261gpBQWR8mNCXLKboJFf9-h0ICic9y_0doZEzKkU5hLZ-PMtP0JWb";
+  var req = "https://dev.virtualearth.net/REST/V1/Routes/Transit?wp.0=" + encodeURIComponent(start) + "&wp.1=" + encodeURIComponent(to) + "&output=json&key=" + "Air9YbvoUA261gpBQWR8mNCXLKboJFf9-h0ICic9y_0doZEzKkU5hLZ-PMtP0JWb";
   CallRestService(req, GeocodeCallback);
 
 
