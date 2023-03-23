@@ -13,7 +13,6 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig)
 const db = getDatabase(app);
 // reference your database
-console.log(db)
 
 document.getElementById("sub").addEventListener('click', submitForm);
 
@@ -22,8 +21,7 @@ function submitForm(e) {
     e.preventDefault()
 
 
-    var from = getElementVal("from_destination");
-    var to = getElementVal("to_destination");
+    var location = getElementVal("location");
     var reponse = getElementVal("response");
     var mode = getElementVal("form_sel");
     var ev_status
@@ -31,7 +29,7 @@ function submitForm(e) {
         ev_status = getElementVal("ev_select1")
     }
     finally {
-        saveMessages(from, to, reponse, mode, ev_status);
+        saveMessages(location, reponse, mode, ev_status);
     }
 
 
@@ -39,13 +37,12 @@ function submitForm(e) {
     document.getElementById("review_form").reset();
 }
 
-const saveMessages = (from, to, response, mode, ev_status) => {
+const saveMessages = (location, response, mode, ev_status) => {
 
     const newPostKey = push(child(ref(db), 'review')).key;
     if (mode == 'ev') {
         set(ref(db, 'reviews/ev/' + newPostKey), {
-            from: from,
-            to: to,
+            location: location,
             review: response,
             ev_status: ev_status
         }).then(() => {
@@ -56,8 +53,7 @@ const saveMessages = (from, to, response, mode, ev_status) => {
     }
     else {
         set(ref(db, 'reviews/transit/' + newPostKey), {
-            from: from,
-            to: to,
+            location: location,
             review: response,
 
         }).then(() => {

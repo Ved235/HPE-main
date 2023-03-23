@@ -116,7 +116,6 @@ function GetMap() {
     lat = center.latitude;
     lon = center.longitude;
 
-    console.log(lat, lon);
     link = "https://api.tomtom.com/search/2/categorySearch/EV%20chargers.json?limit=1000&lat=" + lat + "&lon=" + lon + "&categorySet=7309&key=vy4XZo3nOafLfepP4LVXYw6GbPkyjQL8";
 
     const xhr = new XMLHttpRequest();
@@ -127,7 +126,7 @@ function GetMap() {
       if (xhr.readyState == 4 && xhr.status == 200) {
 
         ev_chargers = xhr.response;
-        console.log(ev_chargers);
+
 
         infobox = new Microsoft.Maps.Infobox(map.getCenter(), { visible: false });
         infobox.setMap(map);
@@ -170,7 +169,8 @@ function GetMap() {
 
 
       } else {
-        console.log(`Error: ${xhr.status}`);
+
+
       }
     };
 
@@ -256,7 +256,7 @@ function directionsUpdated(e) {
     to = current;
 
   }
-  console.log(start + to);
+
 
   var req = "http://dev.virtualearth.net/REST/V1/Routes/Transit?wp.0=" + encodeURIComponent(start) + "&wp.1=" + encodeURIComponent(to) + "&output=json&key=" + "Air9YbvoUA261gpBQWR8mNCXLKboJFf9-h0ICic9y_0doZEzKkU5hLZ-PMtP0JWb";
   CallRestService(req, GeocodeCallback);
@@ -299,7 +299,8 @@ function directionsUpdated(e) {
 }
 
 function GeocodeCallback(response) {
-  console.log(response);
+
+
   var carb = 0.0;
   var price = 0.0;
   var items = response.resourceSets[0].resources[0].routeLegs[0].itineraryItems;
@@ -329,7 +330,8 @@ function GeocodeCallback(response) {
       else if (items[i].travelDistance > 32) {
         price += 60;
       }
-      console.log(price + " metro");
+
+
     }
     else if (items[i].iconType == "Bus") {
       carb += carbonCalculate(4, items[i].travelDistance);
@@ -346,12 +348,14 @@ function GeocodeCallback(response) {
       else if (items[i].travelDistance > 12) {
         price += 25;
       }
-      console.log(price + " bus");
+
+
     }
 
   }
 
-  console.log(response);
+
+
   var carbon_element = document.getElementById("carbon");
   carbon_element.innerHTML += Math.round(carb * 100) / 100 + " kg of CO2 for public Transit. ";
 
@@ -427,7 +431,7 @@ function createCircle(center, radius, color) {
 function createCustomPushpins(size) {
   //Generate 100 random pushpins within the map bounds.
 
-  console.log(ev_chargers.results[0].position.lat);
+
   var pins = Microsoft.Maps.TestDataGenerator.getPushpins(ev_chargers.results.length, map.getBounds());
 
   var pos = map.getCenter();
