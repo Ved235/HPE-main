@@ -11,5 +11,18 @@
   },
   "dependencies": {
     "firebase": "^9.18.0"
-  }
+  },
+  "name": "hpe-main",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Ved235/HPE-main.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Ved235/HPE-main/issues"
+  },
+  "homepage": "https://github.com/Ved235/HPE-main#readme",
+  "description": ""
 }
