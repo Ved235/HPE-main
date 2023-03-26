@@ -6,8 +6,10 @@ var clusterLayer, infobox;
 var ev_chargers;
 var lat, lon;
 var circle = [];
+var distance
 var circle_length = .7;
 var circle_color = 'rgba(1,150,200,0.07)';
+var carbonCar = 0
 var base64Image = "data:image/png;base64,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";
 
 
@@ -268,7 +270,7 @@ function directionsUpdated(e) {
   var routeMode = directionsManager.getRequestOptions().routeMode;
 
   //Get the distance of the route, rounded to 2 decimal places.
-  var distance = Math.round(e.routeSummary[routeIdx].distance * 100) / 100;
+  distance = Math.round(e.routeSummary[routeIdx].distance * 100) / 100;
 
   //Get the distance units used to calculate the route.
   var units = directionsManager.getRequestOptions().distanceUnit;
@@ -280,11 +282,11 @@ function directionsUpdated(e) {
     //Must be in miles
     distanceUnits = "miles";
   }
-  carbonCalculate(routeMode, distance);
+  carbonCar = carbonCalculate(1, distance);
   //Time is in seconds, convert to minutes and round off.
   var time = Math.round(e.routeSummary[routeIdx].timeWithTraffic / 60);
   var carbon_element = document.getElementById("carbon");
-  carbon_element.innerHTML = carbonCalculate(1, distance) + " kg of CO2 for fuel driven car and ";
+  carbon_element.innerHTML = carbonCar + " kg of CO2 for fuel driven car and ";
 
   var price_element = document.getElementById("fp1");
 
@@ -304,6 +306,7 @@ function GeocodeCallback(response) {
 
   var carb = 0.0;
   var price = 0.0;
+
   var items = response.resourceSets[0].resources[0].routeLegs[0].itineraryItems;
   for (let i = 0; i < items.length; i++) {
 
@@ -358,10 +361,10 @@ function GeocodeCallback(response) {
 
 
   var carbon_element = document.getElementById("carbon");
-  carbon_element.innerHTML += Math.round(carb * 100) / 100 + " kg of CO2 for public Transit. ";
+  carbon_element.innerHTML += Math.round(carb * 100) / 100 + " kg of CO2 for public transit.<br><b>" + Math.round((1-(carb/carbonCar))*100) +"% CO2 savings</b>" ;
 
   var price_element = document.getElementById("fp");
-  price_element.innerHTML = "₹" + Math.round(price * 100) / 100 + " for public transit"
+  price_element.innerHTML = "₹" + Math.round(price * 100) / 100 + " for public transit.<br><b>" + Math.round((1-(price/calculatefpev(distance)))*100) +"% Fare savings</b>" 
 
 }
 
