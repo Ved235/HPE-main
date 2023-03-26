@@ -288,15 +288,18 @@ function directionsUpdated(e) {
   var carbon_element = document.getElementById("carbon");
   carbon_element.innerHTML = carbonCar + " kg of CO2 for fuel driven car and ";
 
-  var price_element = document.getElementById("fp1");
+  if(routeMode == 1){
+    var price_element = document.getElementById("fp1");
 
 
-  if (distance > 55) {
-    price_element.innerHTML = "distance to large";
+    if (distance > 55) {
+      price_element.innerHTML = "distance to large";
+    }
+    else {
+      price_element.innerHTML = "₹" + calculatefpev(distance) + " for an ev taxi with 0 carbon emmisions";
+    }
   }
-  else {
-    price_element.innerHTML = "₹" + calculatefpev(distance) + " for an ev taxi with 0 carbon emmisions";
-  }
+
 
 
 }
@@ -364,7 +367,14 @@ function GeocodeCallback(response) {
   carbon_element.innerHTML += Math.round(carb * 100) / 100 + " kg of CO2 for public transit.<br><b>" + Math.round((1-(carb/carbonCar))*100) +"% CO2 savings</b>" ;
 
   var price_element = document.getElementById("fp");
-  price_element.innerHTML = "₹" + Math.round(price * 100) / 100 + " for public transit.<br><b>" + Math.round((1-(price/calculatefpev(distance)))*100) +"% Fare savings</b>" 
+  
+  if(directionsManager.getRequestOptions().routeMode == 1){
+    var percent = Math.round((1-(price/calculatefpev(distance)))*100)
+    price_element.innerHTML = "₹" + Math.round(price * 100) / 100 + " for public transit.<br><b>" + percent +"% Fare savings</b>" 
+  }
+  else{
+    price_element.innerHTML = "₹" + Math.round(price * 100) / 100 + " for public transit."
+  }
 
 }
 
