@@ -293,7 +293,7 @@ function directionsUpdated(e) {
     price_element.innerHTML = "distance to large";
   }
   else {
-    price_element.innerHTML = "about ₹" + calculatefpev(distance) + " price for a ev taxi with 0 carbon emmisions from our partner.";
+    price_element.innerHTML = "₹" + calculatefpev(distance) + " for an ev taxi with 0 carbon emmisions";
   }
 
 
@@ -361,7 +361,7 @@ function GeocodeCallback(response) {
   carbon_element.innerHTML += Math.round(carb * 100) / 100 + " kg of CO2 for public Transit. ";
 
   var price_element = document.getElementById("fp");
-  price_element.innerHTML = "about ₹" + Math.round(price * 100) / 100 + " for public transit route."
+  price_element.innerHTML = "₹" + Math.round(price * 100) / 100 + " for public transit"
 
 }
 
