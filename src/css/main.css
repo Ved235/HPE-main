@@ -1922,7 +1922,7 @@ html[data-useragent*='MSIE 10.0'] .home-scrolldown,
 .about-how-content .step {
   padding: 0 40px 1.5rem 60px;
   position: relative;
-  min-height: 240px;
+  min-height: 100px;
 }
 
 .about-how-content .step h3 {
@@ -2505,37 +2505,14 @@ html[data-useragent*='MSIE 10.0'] .home-scrolldown,
   max-width: 800px;
 }
 
-#download .download-badges {
-  list-style: none;
-  margin: 0;
-  text-align: center;
-}
 
-#download .download-badges li {
+#download .download-badges li  {
   display: inline-block;
   margin: 0 7.5px;
   padding-left: 0;
+
 }
 
-#download .download-badges li a {
-  display: block;
-  width: 230px;
-  height: 71px;
-  font: 0/0 a;
-  text-shadow: none;
-  color: transparent;
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: 230px 71px;
-}
-
-#download .download-badges li a.badge-appstore {
-  background-image: url("../images/appstore.png");
-}
-
-#download .download-badges li a.badge-googleplay {
-  background-image: url("../images/google-play.png");
-}
 
 
 /* ------------------------------------------------------------------- 
