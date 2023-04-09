@@ -29,10 +29,7 @@
  *
  * ------------------------------------------------------------------- */
 
-@import url("font-awesome/css/font-awesome.min.css");
-@import url("micons/micons.css");
-@import url("fonts.css");
-
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,200;0,300;1,300&family=Ubuntu&display=swap');
 
 /* ===================================================================
  *  02. base style overrides - (_document-setup)
@@ -68,7 +65,7 @@ body {
 
 body {
   background: #141515;
-  font-family: "muli-regular", sans-serif;
+  font-family: "Montserrat", sans-serif;
   font-size: 1.6rem;
   line-height: 1.875;
   color: #767676;
@@ -100,7 +97,7 @@ a:focus {
  * ------------------------------------------------------------------- */
 
 h1, h2, h3, h4, h5, h6, .h01, .h02, .h03, .h04, .h05, .h06 {
-  font-family: "montserrat-regular", sans-serif;
+  font-family: "Montserrat", sans-serif;
   color: #151515;
   font-style: normal;
   text-rendering: optimizeLegibility;
@@ -157,7 +154,7 @@ p img {
 }
 
 p.lead {
-  font-family: "muli-light", sans-serif;
+  font-family: "Montserrat", sans-serif;
   font-size: 2.1rem;
   line-height: 1.857;
   color: #838383;
@@ -177,10 +174,10 @@ em, i, strong, b {
   font-weight: normal;
 }
 em, i {
-  font-family: "muli-italic", sans-serif;
+  font-family: "Montserrat", sans-serif;
 }
 strong, b {
-  font-family: "muli-bold", sans-serif;
+  font-family: "Montserrat", sans-serif;
 }
 
 small {
@@ -207,7 +204,7 @@ blockquote:before {
 }
 
 blockquote p {
-  font-family: "muli-light", sans-serif;
+  font-family: "Montserrat", sans-serif;
   padding: 0;
   font-size: 1.9rem;
   line-height: 1.895;
@@ -231,7 +228,7 @@ blockquote cite a:visited {
 }
 
 abbr {
-  font-family: "muli-bold", sans-serif;
+  font-family: "Montserrat", sans-serif;
   font-variant: small-caps;
   text-transform: lowercase;
   letter-spacing: .05rem;
@@ -441,7 +438,7 @@ table {
   border-width: 0;
   width: 100%;
   max-width: 100%;
-  font-family: "muli-regular", sans-serif;
+  font-family: "Montserrat", sans-serif;
 }
 
 th,
@@ -453,7 +450,7 @@ td {
 
 th {
   color: #151515;
-  font-family: "montserrat-bold", sans-serif;
+  font-family: "Montserrat", sans-serif;
 }
 
 td {
@@ -578,7 +575,7 @@ select {
   border: 0;
   outline: none;
   color: #333333;
-  font-family: "muli-regular", sans-serif;
+  font-family: "Montserrat", sans-serif;
   font-size: 1.5rem;
   line-height: 3rem;
   max-width: 100%;
@@ -657,7 +654,7 @@ select:focus {
 
 label,
 legend {
-  font-family: "montserrat-bold", sans-serif;
+  font-family: "Montserrat", sans-serif;
   font-size: 1.4rem;
   margin-bottom: .6rem;
   color: #151515;
@@ -672,7 +669,7 @@ input[type="radio"] {
 label>.label-text {
   display: inline-block;
   margin-left: 1rem;
-  font-family: "montserrat-regular", sans-serif;
+  font-family: "Montserrat", sans-serif;
   line-height: inherit;
 }
 
@@ -741,7 +738,7 @@ input[type="submit"],
 input[type="reset"],
 input[type="button"] {
   display: inline-block;
-  font-family: "montserrat-regular", sans-serif;
+  font-family: "Montserrat", sans-serif;
   font-size: 1.5rem;
   height: 5.4rem;
   line-height: calc(5.4rem - .6rem);
@@ -859,7 +856,7 @@ input::-moz-focus-inner {
   position: relative;
   margin-bottom: 3rem;
   border-radius: 3px;
-  font-family: "montserrat-regular", sans-serif;
+  font-family: "Montserrat", sans-serif;
   font-size: 1.5rem;
 }
 
@@ -904,7 +901,7 @@ input::-moz-focus-inner {
   margin: 0;
   padding: 1.5rem .6rem 0 0;
   font-size: 8.4rem;
-  font-family: "montserrat-bold", sans-serif;
+  font-family: "Montserrat", sans-serif;
   line-height: 6rem;
   text-indent: 0;
   background: transparent;
@@ -1046,7 +1043,7 @@ input::-moz-focus-inner {
 .stats-tabs li a {
   display: inline-block;
   font-size: 2.5rem;
-  font-family: "montserrat-semibold", sans-serif;
+  font-family: "Montserrat", sans-serif;
   border: none;
   color: #151515;
 }
@@ -1059,7 +1056,7 @@ input::-moz-focus-inner {
   display: block;
   margin: .6rem 0 0 0;
   font-size: 1.4rem;
-  font-family: "montserrat-regular", sans-serif;
+  font-family: "Montserrat", sans-serif;
   color: #909090;
 }
 
@@ -1071,7 +1068,7 @@ input::-moz-focus-inner {
  * ------------------------------------------------------------------- */
 
 h1.intro-header {
-  font-family: "montserrat-regular", sans-serif;
+  font-family: "Montserrat", sans-serif;
   font-size: 3.4rem;
   line-height: 1.324;
   color: #151515;
@@ -1182,7 +1179,7 @@ h1.intro-header::before {
   height: 42px;
   width: 42px;
   line-height: 42px;
-  font-family: "montserrat-regular", sans-serif;
+  font-family: "Montserrat", sans-serif;
   font-size: 1.4rem;
   text-transform: uppercase;
   letter-spacing: .2rem;
@@ -1265,7 +1262,7 @@ h1.intro-header::before {
  * ------------------------------------------------------------------- */
 
 #header-nav-wrap {
-  font-family: "montserrat-medium", sans-serif;
+  font-family: "Montserrat", sans-serif;
   font-size: 14px;
   position: absolute;
   top: 0;
@@ -1308,7 +1305,7 @@ h1.intro-header::before {
   height: 3.6rem;
   line-height: calc(3.6rem - .6rem);
   padding: 0 1.5rem;
-  font-family: "montserrat-medium", sans-serif;
+  font-family: "Montserrat", sans-serif;
   font-size: 14px;
   text-transform: none;
   letter-spacing: normal;
@@ -1466,7 +1463,7 @@ h1.intro-header::before {
 }
 
 .home-content-left h1 {
-  font-family: "montserrat-regular", sans-serif;
+  font-family: "Montserrat", sans-serif;
   font-size: 5.2rem;
   letter-spacing: -.05rem;
   line-height: 1.269;
@@ -1589,7 +1586,7 @@ html[data-useragent*='MSIE 10.0'] .home-scrolldown,
 
 .scroll-icon {
   display: inline-block;
-  font-family: "montserrat-medium", sans-serif;
+  font-family: "Montserrat", sans-serif;
   font-size: 1.2rem;
   text-transform: uppercase;
   letter-spacing: .3rem;
@@ -1863,7 +1860,7 @@ html[data-useragent*='MSIE 10.0'] .home-scrolldown,
 }
 
 .about-features .feature h3 {
-  font-family: "montserrat-regular", sans-serif;
+  font-family: "Montserrat", sans-serif;
   font-size: 1.9rem;
   color: #151515;
   margin-bottom: 3rem;
@@ -1922,7 +1919,7 @@ html[data-useragent*='MSIE 10.0'] .home-scrolldown,
 .about-how-content .step {
   padding: 0 40px 1.5rem 60px;
   position: relative;
-  min-height: 100px;
+  min-height: 240px;
 }
 
 .about-how-content .step h3 {
@@ -1931,7 +1928,7 @@ html[data-useragent*='MSIE 10.0'] .home-scrolldown,
 
 .about-how-content .step::before {
   display: block;
-  font-family: "muli-bold";
+  font-family: "Montserrat";
   font-size: 2rem;
   content: attr(data-item);
   color: #ffffff;
@@ -2108,13 +2105,13 @@ html[data-useragent*='MSIE 10.0'] .home-scrolldown,
 }
 
 .pricing-table .plan-block .plan-block-title {
-  font-family: "montserrat-regular", sans-serif;
+  font-family: "Montserrat", sans-serif;
   font-size: 2.4rem;
   margin-bottom: 3.6rem;
 }
 
 .pricing-table .plan-block .plan-block-price {
-  font-family: "montserrat-medium", sans-serif;
+  font-family: "Montserrat", sans-serif;
   font-size: 7.8rem;
   color: #151515;
   line-height: 1;
@@ -2122,7 +2119,7 @@ html[data-useragent*='MSIE 10.0'] .home-scrolldown,
 }
 
 .pricing-table .plan-block .plan-block-price sup {
-  font-family: "montserrat-regular", sans-serif;
+  font-family: "Montserrat", sans-serif;
   font-size: 3rem;
   top: -3.6rem;
   margin-right: 3px;
@@ -2131,7 +2128,7 @@ html[data-useragent*='MSIE 10.0'] .home-scrolldown,
 .pricing-table .plan-block .plan-block-per {
   margin-top: -.6rem;
   margin-bottom: 0;
-  font-family: "montserrat-medium", sans-serif;
+  font-family: "Montserrat", sans-serif;
   font-size: 1.7rem;
 }
 
@@ -2150,7 +2147,7 @@ html[data-useragent*='MSIE 10.0'] .home-scrolldown,
 
 .pricing-table .plan-block .plan-block-features li span {
   color: #39b54a;
-  font-family: "muli-bold", sans-serif;
+  font-family: "Montserrat", sans-serif;
 }
 
 .pricing-table .plan-block.primary {
@@ -2295,7 +2292,7 @@ html[data-useragent*='MSIE 10.0'] .home-scrolldown,
 }
 
 #testimonial-slider p {
-  font-family: "muli-regular", sans-serif;
+  font-family: "Montserrat", sans-serif;
   font-size: 3.2rem;
   line-height: 1.5;
   color: #303030;
@@ -2304,7 +2301,7 @@ html[data-useragent*='MSIE 10.0'] .home-scrolldown,
 #testimonial-slider p::before,
 #testimonial-slider p::after {
   display: inline-block;
-  font-family: "muli-regular", serif;
+  font-family: "Montserrat", serif;
   font-size: 3.6rem;
   line-height: 1;
   position: relative;
@@ -2344,7 +2341,7 @@ html[data-useragent*='MSIE 10.0'] .home-scrolldown,
 
 #testimonial-slider .testimonial-author .author-info span {
   display: block;
-  font-family: "muli-bold", sans-serif;
+  font-family: "Montserrat", sans-serif;
   font-size: 1.6rem;
   line-height: 1.313;
   letter-spacing: 0;
@@ -2365,7 +2362,7 @@ html[data-useragent*='MSIE 10.0'] .home-scrolldown,
 
 #testimonial-slider .owl-nav [class*='owl-'] {
   color: #FFFFFF;
-  font-family: "montserrat-regular", sans-serif;
+  font-family: "Montserrat", sans-serif;
   font-size: 1.4rem;
   height: 3rem;
   line-height: 3rem;
@@ -2506,13 +2503,6 @@ html[data-useragent*='MSIE 10.0'] .home-scrolldown,
 }
 
 
-#download .download-badges li  {
-  display: inline-block;
-  margin: 0 7.5px;
-  padding-left: 0;
-
-}
-
 
 
 /* ------------------------------------------------------------------- 
@@ -2636,7 +2626,7 @@ footer ul a:visited {
   width: 100%;
   height: 5.4rem;
   padding: 1.2rem 100px 1.2rem 60px;
-  background: url(../images/email-icon.png) 20px center no-repeat, rgba(0, 0, 0, 0.1);
+
   background-size: 24px 16px, auto;
   margin-bottom: 1.8rem;
   color: rgba(255, 255, 255, 0.5);
@@ -2659,7 +2649,7 @@ footer ul a:visited {
 
 .footer-subscribe #mc-form label {
   color: #ffffff;
-  font-family: "montserrat-regular", sans-serif;
+  font-family: "Montserrat", sans-serif;
   font-size: 1.3rem;
   padding: 0 2rem;
 }

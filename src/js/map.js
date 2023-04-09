@@ -28,7 +28,17 @@ function form_select() {
 }
 
 
+function responsive() {
+  if (document.getElementById('checkm').checked) {
+    document.getElementById("squish").style.display = "none";
+    document.getElementById("squish1").style.display = "none";
+  }
+  else {
+    document.getElementById("squish").style.display = "block";
+    document.getElementById("squish1").style.display = "block";
+  }
 
+}
 
 
 function validate() {
