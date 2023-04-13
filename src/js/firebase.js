@@ -85,19 +85,6 @@ const getElementVal = (id) => {
 function randomNumber(min, max) {
     return Math.random() * (max - min) + min;
 }
-for(var i = 0; i<10;i++){
-    set(ref(db, 'stations/' + i), {
-        latitude: randomNumber(28,30) ,
-        longitude: randomNumber(77,79),
-        address: "Text Address "+i,
-        name: "Test Station "+i
-
-    }).then(() => {
-        alert("Feedback Saved")
-    }).catch((error) => {
-        alert(error)
-    });
-}
 
 
 
