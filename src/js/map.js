@@ -1,19 +1,29 @@
-
+// initializing variables
 var map;
 var directionsManager;
 var current;
-var clusterLayer, infobox;
+var ev_charger_pins, infobox;
+var ev_private_charger_pins;
 var ev_chargers;
+var private_ev_chargers =  JSON.parse(window.localStorage.getItem('firebase'));
 var lat, lon;
-var circle = [];
+
 var distance
-var circle_length = .7;
-var circle_color = 'rgba(1,150,200,0.07)';
 var carbonCar = 0
+
+var circle_ev_length = .7;
+var circle_ev_color = ' rgba(0,191,0,0.07)';
+var circle_ev = [];
+
+var circle_ev_length_private = .7;
+var circle_ev_color_private = ' rgba(6,138,249,0.07)';
+var circle_ev_private = [];
+
+// base64 image for ev charger pin
 var base64Image = "data:image/png;base64,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";
+var base64Image_private = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAC8AAAAvCAMAAABE+WOeAAAABGdBTUEAALGPC/xhBQAAAAFzUkdCAK7OHOkAAABRUExURUxpcQEBAQAAAAEBAQAAAAEBAQICAgEBAQAAAAAHDgAAAAAAAAAAAAAAAAAAAAEBAQEBAQEBAQWK+QAAAAJLiQEzXAR31wNcpwSB6QEaMARsxPLaOB8AAAASdFJOUwA+6xm5Tgspx/7abnqiq2OOmuB1554AAAGRSURBVEjH1ZXZkoQgDEVbFhERVHD//w8dcUHAuPRLV02etDwxuSEkn8+vDbPVcPoGpkWtiDUl64Kye5rROkPGGcqUSK7plFaZiQwpcRUDlwSZs+UVHAKLzICGJOSQljHeNuPmUAMOlMR4p3u+OVQnDaxGJ1zrcdcg4rMocwB3vFFRRkxCeMvNRQB6iOVd1xveWNz7gQoUpMWR/TCTvTFNgJuMXqSjF+u9924pUeEnxFwx+crrZnu10Sb7JP2Ekj395fvqwBctLhgB+U5r32E6cssSqDwebx36QwrIj4MOHRqnPCjQns+kdezgCpo886toiN/q2Q6xg+OD+jAF6F3MBQjqj6snPjzfvZ2bOJ8W7p9NwDUe9eecELrF8yK6YPbE+ojmXvvHNx7PN2DlBz4uled+95fnUSjXdtHABMpECg+UaRigCVfgVwPrFrcO5BvczmeFgNzx9USnEn2Dz+dcBXOOk/JhKbEi95cFfdxhWDjVqKYvNt5cJn67WGDViAj2dgMzIVVF0/crO5239ed/2B8d9UutG4p52wAAAABJRU5ErkJggg=="
 
-
-
+// remove and show the 'were there enough ev chargers in the route' input panel depending on the mode selected in the form
 function form_select() {
 
   if (document.getElementById("form_sel").value == "transit") {
@@ -27,7 +37,7 @@ function form_select() {
   }
 }
 
-
+// for mobile menu hiding
 function responsive() {
   if (document.getElementById('checkm').checked) {
     document.getElementById("squish").style.display = "none";
@@ -40,35 +50,57 @@ function responsive() {
 
 }
 
-
-function validate() {
+// remove normal info panels and show ev charger panels when ev switch is clickeds
+function evSwitch() {
   if (document.getElementById('switch').checked) {
     document.getElementById("direc_emmis").style.display = "none";
     document.getElementById("fair_price").style.display = "none";
     document.getElementById("ev_chargers").style.display = "block";
+    document.getElementById("ev_chargers_private").style.display = "block";
   } else {
     document.getElementById("direc_emmis").style.display = "block";
     document.getElementById("fair_price").style.display = "block";
     document.getElementById("ev_chargers").style.display = "none";
-    map.layers.remove(clusterLayer);
-    for (let i = 0; i < circle.length; i++) {
-      map.entities.remove(circle[i]);
+    document.getElementById("ev_chargers_private").style.display = "none";
+    map.layers.remove(ev_charger_pins);
+    for (let i = 0; i < circle_ev.length; i++) {
+      map.entities.remove(circle_ev[i]);
     }
     document.getElementById("switch1").checked = false;
   }
 }
 
+
+// show chargers when ev charger switch is clicked
 function charger() {
   if (document.getElementById('switch1').checked) {
-    map.layers.insert(clusterLayer);
+    map.layers.insert(ev_charger_pins);
 
-    for (let i = 0; i < circle.length; i++) {
-      map.entities.push(circle[i]);
+    for (let i = 0; i < circle_ev.length; i++) {
+      map.entities.push(circle_ev[i]);
     }
   } else {
-    map.layers.remove(clusterLayer);
-    for (let i = 0; i < circle.length; i++) {
-      map.entities.remove(circle[i]);
+    map.layers.remove(ev_charger_pins);
+    for (let i = 0; i < circle_ev.length; i++) {
+      map.entities.remove(circle_ev[i]);
+    }
+  }
+}
+
+
+// show private chargers when private ev charger switch is clicked
+function charger_private() {
+  if (document.getElementById('switch2').checked) {
+    map.layers.insert(ev_private_charger_pins);
+
+    for (let i = 0; i < circle_ev_private.length; i++) {
+      map.entities.push(circle_ev_private[i]);
+    }
+  } else {
+    map.layers.remove(ev_private_charger_pins);
+
+    for (let i = 0; i < circle_ev_private.length; i++) {
+      map.entities.remove(circle_ev_private[i]);
     }
   }
 }
@@ -76,9 +108,7 @@ function charger() {
 
 
 
-
-
-
+//style of map
 var sampleStyle = {
   elements: {
     park: { fillColor: "#a9de83" },
@@ -114,7 +144,7 @@ var sampleStyle = {
   version: "1.0",
   extensions: {},
 };
-
+//making map
 function GetMap() {
   map = new Microsoft.Maps.Map("#myMap", {
     showDashboard: false,
@@ -122,13 +152,15 @@ function GetMap() {
 
   });
 
-
+  //get current location
   navigator.geolocation.getCurrentPosition(function (position) {
-    current = position.coords.latitude + "," + position.coords.longitude;
+    current = position.coords.latitude + "," + position.coords.longitude; 
+    
     var center = map.getCenter();
     lat = center.latitude;
     lon = center.longitude;
-
+    
+    //getting locations of ev cahrgeres
     link = "https://api.tomtom.com/search/2/categorySearch/EV%20chargers.json?limit=1000&lat=" + lat + "&lon=" + lon + "&categorySet=7309&key=vy4XZo3nOafLfepP4LVXYw6GbPkyjQL8";
 
     const xhr = new XMLHttpRequest();
@@ -138,6 +170,8 @@ function GetMap() {
     xhr.onload = () => {
       if (xhr.readyState == 4 && xhr.status == 200) {
 
+        //setting locations of ev chargers for clustering and circle generation
+
         ev_chargers = xhr.response;
 
 
@@ -146,13 +180,19 @@ function GetMap() {
 
         Microsoft.Maps.loadModule("Microsoft.Maps.Clustering", function () {
 
-          clusterLayer = new Microsoft.Maps.ClusterLayer(createCustomPushpins(100), {
+          ev_charger_pins = new Microsoft.Maps.ClusterLayer(charger_puspins(), {
             clusteredPinCallback: createCustomClusterPushpins,
+            callback: createPushpinList
+          });
+          ev_private_charger_pins = new Microsoft.Maps.ClusterLayer(charger_private_puspins(), {
+            clusteredPinCallback: createCustomClusterPushpins_private,
             callback: createPushpinList
           });
 
 
-          Microsoft.Maps.Events.addHandler(clusterLayer, 'click', pushpinClicked);
+          Microsoft.Maps.Events.addHandler(ev_charger_pins, 'click', pushpinClicked);
+          Microsoft.Maps.Events.addHandler(ev_private_charger_pins, 'click', pushpinClicked);
+
         });
 
         Microsoft.Maps.loadModule('Microsoft.Maps.SpatialMath', function () {
@@ -168,35 +208,28 @@ function GetMap() {
             pos.latitude = ev_chargers.results[i].position.lat;
             pos.longitude = ev_chargers.results[i].position.lon;
 
-
-
-            circle[i] = (createCircle(pos, circle_length, circle_color));
+            circle_ev[i] = (createCircle(pos, circle_ev_length, circle_ev_color));
 
           }
+          for (let i = 0; i < private_ev_chargers.length; i++) {
 
+            pos.latitude = private_ev_chargers[i].latitude;
+            pos.longitude = private_ev_chargers[i].longitude;
 
+            circle_ev_private[i] = (createCircle(pos, circle_ev_length_private, circle_ev_color_private));
 
-
-
+          }
         });
 
-
       } else {
-
-
       }
     };
-
-
   });
+  
 
 
 
-
-
-
-
-
+  
   //Load the directions module.
   Microsoft.Maps.loadModule("Microsoft.Maps.Directions", function () {
     //Create an instance of the directions manager.
@@ -216,16 +249,15 @@ function GetMap() {
       "directionsUpdated",
       directionsUpdated
     );
+    
 
+    // load modules to make circles
     Microsoft.Maps.loadModule(['Microsoft.Maps.SpatialMath', 'Microsoft.Maps.Contour'], function () {
       var center = map.getCenter();
-      var circle = [];
-      center.latitude = 38.5;
-      circle[0] = createCircle(center, 100, 'rgba(0,150,200,0.5)');
-      center.latitude = 37.1;
-      circle[1] = createCircle(center, 5, 'rgba(0,150,200,.7)');
+     
+      
 
-      var layer = new Microsoft.Maps.ContourLayer(circle, {
+      var layer = new Microsoft.Maps.ContourLayer(circle_ev, {
         colorCallback: function (val) {
           return val;
         },
@@ -238,16 +270,7 @@ function GetMap() {
 
 
   });
-
-
-
-  // CLUSTERING
-
-
-
-
-  // CIRCLES
-
+  
 
 }
 
@@ -256,6 +279,8 @@ function GetMap() {
 
 
 function directionsUpdated(e) {
+
+  // calling bing maps rest api to get data to calculate the price and carbon emmisions of metro
 
   var start = document.querySelector('[title="From"]').value;
   var to = document.querySelector('[title="To"]').value;
@@ -275,6 +300,8 @@ function directionsUpdated(e) {
   CallRestService(req, GeocodeCallback);
 
 
+
+
   //Get the current route index.
   var routeIdx = directionsManager.getRequestOptions().routeIndex;
   var routeMode = directionsManager.getRequestOptions().routeMode;
@@ -289,15 +316,20 @@ function directionsUpdated(e) {
   if (units == Microsoft.Maps.Directions.DistanceUnit.km) {
     distanceUnits = "km";
   } else {
-    //Must be in miles
     distanceUnits = "miles";
   }
+
+  // calculate carbon for car
   carbonCar = carbonCalculate(1, distance);
   //Time is in seconds, convert to minutes and round off.
   var time = Math.round(e.routeSummary[routeIdx].timeWithTraffic / 60);
+
+  // assign carbon emmisions by car to html element
   var carbon_element = document.getElementById("carbon");
   carbon_element.innerHTML = carbonCar + " kg of CO2 for fuel driven car and ";
+  
 
+  // assign price of ev taxi to html element
   if(routeMode == 1){
     var price_element = document.getElementById("fp1");
 
@@ -315,7 +347,7 @@ function directionsUpdated(e) {
 }
 
 function GeocodeCallback(response) {
-
+  // calculating transit price and carbon emmisions 
 
   var carb = 0.0;
   var price = 0.0;
@@ -328,7 +360,12 @@ function GeocodeCallback(response) {
       carb += carbonCalculate(3, items[i].travelDistance);
     }
     else if (items[i].iconType == "Train") {
+
+      
+      // calculate carbon emmisions for metro
       carb += carbonCalculate(2, items[i].travelDistance);
+
+      // price of metro based on delhi metro charts
       if (items[i].travelDistance <= 2) {
         price += 10;
       }
@@ -351,7 +388,11 @@ function GeocodeCallback(response) {
 
     }
     else if (items[i].iconType == "Bus") {
+      // calculate carbon emmisions for bus
       carb += carbonCalculate(4, items[i].travelDistance);
+
+
+      // bus fares based on dtc charts
 
       if (items[i].travelDistance <= 4) {
         price += 10;
@@ -370,9 +411,8 @@ function GeocodeCallback(response) {
     }
 
   }
-
-
-
+  
+  // assigning vales of price and carbon emmisions to the html elements
   var carbon_element = document.getElementById("carbon");
   carbon_element.innerHTML += Math.round(carb * 100) / 100 + " kg of CO2 for public transit.<br><b>" + Math.round((1-(carb/carbonCar))*100) +"% CO2 savings</b>" ;
 
@@ -389,27 +429,28 @@ function GeocodeCallback(response) {
 }
 
 function carbonCalculate(e, d) {
-
+ // calculating the carbon emmisions
   var multi;
   switch (e) {
     case 1:
-      multi = 121 * d;
+      multi = 121 * d; // car
       break;
     case 2:
-      multi = 7.837 * d;
+      multi = 7.837 * d; // metro
       break;
     case 3:
-      multi = 0 * d;
+      multi = 0 * d; //walk / ev
       break;
     case 4:
-      multi = 12 * d;
+      multi = 12 * d; // bus
       break;
   }
-
+   
   return Math.round(multi / 10) / 100;
 }
 
 function calculatefpev(d) {
+  // calculate ev taxi price (blusmart) based on their slab rates
   if (d <= 5) {
     return 149
   }
@@ -447,25 +488,32 @@ function calculatefpev(d) {
 function createCircle(center, radius, color) {
   //Calculate the locations for a regular polygon that has 36 locations which will rssult in an approximate circle.
   var locs = Microsoft.Maps.SpatialMath.getRegularPolygon(center, radius, 36, Microsoft.Maps.SpatialMath.DistanceUnits.Miles);
-
   return new Microsoft.Maps.Polygon(locs, { fillColor: color, strokeThickness: 0 });
-
 }
 
-function createCustomPushpins(size) {
-  //Generate 100 random pushpins within the map bounds.
 
+// create ev charger pushpins
+function charger_puspins() {
+  
 
+  // create pins
   var pins = Microsoft.Maps.TestDataGenerator.getPushpins(ev_chargers.results.length, map.getBounds());
-
+  // making variable to store lat and lon (getCenter makes such a variable)
   var pos = map.getCenter();
+  
 
 
+  // find ev chargers and set lat, lon and metadata of pins
   for (let i = 0; i < ev_chargers.results.length; i++) {
+    
 
+    // setting lat and lon
     pos.latitude = ev_chargers.results[i].position.lat;
     pos.longitude = ev_chargers.results[i].position.lon;
+    
 
+
+    // setting metadata
     pins[i] = new Microsoft.Maps.Pushpin(pos, {
 
       title: ev_chargers.results[i].poi.name,
@@ -481,13 +529,49 @@ function createCustomPushpins(size) {
 
 
 
+  return pins;
+}
+
+function charger_private_puspins() {
+  
+
+  // create pins
+  var pins = Microsoft.Maps.TestDataGenerator.getPushpins(private_ev_chargers, map.getBounds());
+  // making variable to store lat and lon (getCenter makes such a variable)
+  var pos = map.getCenter();
+  
+  
+
+  
+  // set private ev chargers and set lat, lon and metadata of pins
+  for (let i = 0; i < private_ev_chargers.length; i++) {
+    
+
+    // setting lat and lon
+    pos.latitude = private_ev_chargers[i].latitude;
+    pos.longitude = private_ev_chargers[i].longitude;
+    
 
 
+    // setting metadata
+    pins[i] = new Microsoft.Maps.Pushpin(pos, {
+
+      title: private_ev_chargers[i].name,
+      subTitle: '',
+      icon: base64Image_private,
+    });
+    pins[i].metadata = {
+      title:private_ev_chargers[i].name,
+      description: private_ev_chargers[i].address
+
+    };
+  }
+  console.log(pins);
   return pins;
 }
 
 function createCustomClusterPushpins(cluster) {
-  //Create a title for the cluster.
+  //Create a title for the cluster
   cluster.setOptions({
     title: 'Cluster of ' + cluster.containedPushpins.length + ' EV charging stations',
     icon: base64Image,
@@ -496,10 +580,20 @@ function createCustomClusterPushpins(cluster) {
   });
 }
 
+function createCustomClusterPushpins_private(cluster) {
+  //Create a title for the cluster
+  cluster.setOptions({
+    title: 'Cluster of ' + cluster.containedPushpins.length + ' EV charging stations',
+    icon: base64Image_private,
+    textOffset: new Microsoft.Maps.Point(-2, 12),
+
+  });
+}
+
 function pushpinClicked(e) {
 
   if (e.target.metadata) {
-    //Set the infobox options with the metadata of the pushpin.
+    //Set the infobox options with the metadata of the pushpin which includes address and name
     infobox.setOptions({
       location: e.target.getLocation(),
       title: e.target.metadata.title,
@@ -512,14 +606,14 @@ function pushpinClicked(e) {
 function createPushpinList() {
   //Create a list of displayed pushpins each time clustering layer updates.
 
-  if (clusterLayer != null) {
+  if (ev_charger_pins != null) {
     infobox.setOptions({ visible: false });
 
     //Get all pushpins that are currently displayed.
-    var data = clusterLayer.getDisplayedPushpins();
+    var data = ev_charger_pins.getDisplayedPushpins();
     var output = [];
 
-
+    // create titles for all pins
     for (var i = 0; i < data.length; i++) {
       output.push("<a href='javascript:void(0);' onclick='showInfoboxByGridKey(", data[i].gridKey, ");'>");
       output.push(data[i].getTitle(), "</a><br/>");
@@ -531,7 +625,7 @@ function createPushpinList() {
 
 function showInfoboxByGridKey(gridKey) {
   //Look up the cluster or pushpin by gridKey.
-  var clusterPin = clusterLayer.getClusterPushpinByGridKey(gridKey);
+  var clusterPin = ev_charger_pins.getClusterPushpinByGridKey(gridKey);
 
   //Show an infobox for the cluster or pushpin.
   showInfobox(clusterPin);
@@ -550,22 +644,7 @@ function showInfoboxByGridKey(gridKey) {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+// call rest service for bing maps
 function CallRestService(request, callback) {
   $.ajax({
     url: request,

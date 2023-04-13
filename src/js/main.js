@@ -9,7 +9,7 @@
 
 	var cfg = {		
 		scrollDuration : 800, // smoothscroll duration
-		mailChimpURL   : 'https://facebook.us8.list-manage.com/subscribe/post?u=cdb7b577e41181934ed6a6a44&amp;id=e6957d85dc'  // mailchimp url
+		
 	},	
 
 	$WIN = $(window);	
@@ -163,75 +163,14 @@
 	
 
 
-  /* Animate On Scroll
-  	* ------------------------------------------------------ */
-	var ssAOS = function() {
-
-		AOS.init( {
-      	offset: 200,
-      	duration: 600,
-      	easing: 'ease-in-sine',
-      	delay: 300,
-			once: true,
-			disable: 'mobile'
-    	});
-
-	};
+ 
 
 
-  /* AjaxChimp
-	* ------------------------------------------------------ */
-	var ssAjaxChimp = function() {
-
-		$('#mc-form').ajaxChimp({
-			language: 'es',
-		   url: cfg.mailChimpURL
-		});
-
-		// Mailchimp translation
-		//
-		//  Defaults:
-		//	 'submit': 'Submitting...',
-		//  0: 'We have sent you a confirmation email',
-		//  1: 'Please enter a value',
-		//  2: 'An email address must contain a single @',
-		//  3: 'The domain portion of the email address is invalid (the portion after the @: )',
-		//  4: 'The username portion of the email address is invalid (the portion before the @: )',
-		//  5: 'This email address looks fake or invalid. Please enter a real email address'
-
-		$.ajaxChimp.translations.es = {
-		  'submit': 'Submitting...',
-		  0: '<i class="fa fa-check"></i> We have sent you a confirmation email',
-		  1: '<i class="fa fa-warning"></i> You must enter a valid e-mail address.',
-		  2: '<i class="fa fa-warning"></i> E-mail address is not valid.',
-		  3: '<i class="fa fa-warning"></i> E-mail address is not valid.',
-		  4: '<i class="fa fa-warning"></i> E-mail address is not valid.',
-		  5: '<i class="fa fa-warning"></i> E-mail address is not valid.'
-		} 
-
-	};
+  
 
 
  
-  /* Back to Top
-	* ------------------------------------------------------ */
-	var ssBackToTop = function() {
-
-		var pxShow  = 500,         // height on which the button will show
-		fadeInTime  = 400,         // how slow/fast you want the button to show
-		fadeOutTime = 400,         // how slow/fast you want the button to hide
-		scrollSpeed = 300,         // how slow/fast you want the button to scroll to top. can be a value, 'slow', 'normal' or 'fast'
-		goTopButton = $("#go-top")
-
-		// Show or hide the sticky footer button
-		$(window).on('scroll', function() {
-			if ($(window).scrollTop() >= pxShow) {
-				goTopButton.fadeIn(fadeInTime);
-			} else {
-				goTopButton.fadeOut(fadeOutTime);
-			}
-		});
-	};	
+  
 
   
    /* Initialize
@@ -246,8 +185,7 @@
 		ssSmoothScroll();
 		ssPlaceholder();
 		ssAlertBoxes();
-		ssAOS();
-		ssBackToTop();
+	
 
 		// to use the mailchimp form, uncomment the 
 		// function call ssAjaxChimp() below:

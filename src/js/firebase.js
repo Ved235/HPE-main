@@ -1,5 +1,5 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.18.0/firebase-app.js";
-import { getDatabase, ref, set, push, child } from "https://www.gstatic.com/firebasejs/9.18.0/firebase-database.js";
+import { getDatabase, ref, set, push, child,get} from "https://www.gstatic.com/firebasejs/9.18.0/firebase-database.js";
 const firebaseConfig = {
     apiKey: "AIzaSyCNpGBbXO7Pe4KmE0ZVgSTsvpnc9qS6O9Q",
     authDomain: "evgogreenev.firebaseapp.com",
@@ -9,10 +9,22 @@ const firebaseConfig = {
     appId: "1:374211981988:web:733a7335d566fee8762c31",
     databaseURL: "https://evgogreenev-default-rtdb.firebaseio.com"
 };
+
 // initialize firebase
 const app = initializeApp(firebaseConfig)
 const db = getDatabase(app);
 // reference your database
+
+get(ref(db, 'stations/')).then((snapshot) => {
+    if (snapshot.exists()) {
+
+        window.localStorage.setItem('firebase',JSON.stringify(snapshot.val()))
+    } else {
+        console.log("No data available");
+    }
+}).catch((error) => {
+console.error(error);
+});
 
 document.getElementById("sub").addEventListener('click', submitForm);
 
@@ -68,6 +80,8 @@ const saveMessages = (location, response, mode, ev_status) => {
 const getElementVal = (id) => {
     return document.getElementById(id).value;
 };
+
+
 
 
 
