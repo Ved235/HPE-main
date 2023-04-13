@@ -1,5 +1,6 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.18.0/firebase-app.js";
-import { getDatabase, ref, set, push, child,get} from "https://www.gstatic.com/firebasejs/9.18.0/firebase-database.js";
+import { getDatabase, ref, set, push, child, get } from "https://www.gstatic.com/firebasejs/9.18.0/firebase-database.js";
+
 const firebaseConfig = {
     apiKey: "AIzaSyCNpGBbXO7Pe4KmE0ZVgSTsvpnc9qS6O9Q",
     authDomain: "evgogreenev.firebaseapp.com",
@@ -79,7 +80,24 @@ const saveMessages = (location, response, mode, ev_status) => {
 
 const getElementVal = (id) => {
     return document.getElementById(id).value;
+
 };
+function randomNumber(min, max) {
+    return Math.random() * (max - min) + min;
+}
+for(var i = 0; i<10;i++){
+    set(ref(db, 'stations/' + i), {
+        latitude: randomNumber(28,30) ,
+        longitude: randomNumber(77,79),
+        address: "Text Address "+i,
+        name: "Test Station "+i
+
+    }).then(() => {
+        alert("Feedback Saved")
+    }).catch((error) => {
+        alert(error)
+    });
+}
 
 
 
