@@ -394,6 +394,9 @@
             .checkbox:checked+.toggle {
               background-color: rgb(44, 218, 44);
             }
+            .checkbox_blue:checked+.toggle {
+              background-color: rgb(6,138,249);
+            }
 
             .checkbox {
               display: none;
