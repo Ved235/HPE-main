@@ -1,6 +1,5 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.18.0/firebase-app.js";
-import { getDatabase, ref, set, push, child, get } from "https://www.gstatic.com/firebasejs/9.18.0/firebase-database.js";
-
+import { getDatabase, ref, set, push, child,get} from "https://www.gstatic.com/firebasejs/9.18.0/firebase-database.js";
 const firebaseConfig = {
     apiKey: "AIzaSyCNpGBbXO7Pe4KmE0ZVgSTsvpnc9qS6O9Q",
     authDomain: "evgogreenev.firebaseapp.com",
@@ -80,11 +79,7 @@ const saveMessages = (location, response, mode, ev_status) => {
 
 const getElementVal = (id) => {
     return document.getElementById(id).value;
-
 };
-function randomNumber(min, max) {
-    return Math.random() * (max - min) + min;
-}
 
 
 
